@@ -1,6 +1,9 @@
 package stb;
 
+import haxe.io.Bytes;
 import haxe.io.BytesData;
+
+typedef WriteFunc = cpp.Callable<(cpp.Star<cpp.Void>, cpp.Star<cpp.Void>, Int) -> Void>;
 
 @:keep
 #if !display
@@ -24,5 +27,20 @@ extern class ImageWrite {
 
 	@:native("linc::stb_image_write::write_jpg")
 	static function write_jpg(filename:String, w:Int, h:Int, comp:Int, bytes:BytesData, byteOffset:Int, byteLength:Int, quality:Int):Int;
+
+	@:native("linc::stb_image_write::write_bmp_func")
+	static function write_bmp_func(_func:WriteFunc, _context:Any, w:Int, h:Int, comp:Int, bytes:Bytes) : Int;
+
+	@:native("linc::stb_image_write::write_tga_func")
+	static function write_tga_func(_func:WriteFunc, _context:Any, w:Int, h:Int, comp:Int, bytes:Bytes) : Int;
+
+	@:native("linc::stb_image_write::write_hdr_func")
+	static function write_hdr_func(_func:WriteFunc, _context:Any, w:Int, h:Int, comp:Int, bytes:Bytes) : Int;
+
+	@:native("linc::stb_image_write::write_png_func")
+	static function write_png_func(_func:WriteFunc, _context:Any, w:Int, h:Int, comp:Int, bytes:Bytes, stride:Int) : Int;
+
+	@:native("linc::stb_image_write::write_jpg_func")
+	static function write_jpg_func(_func:WriteFunc, _context:Any, w:Int, h:Int, comp:Int, bytes:Bytes, quality:Int) : Int;
 
 } //ImageWrite
